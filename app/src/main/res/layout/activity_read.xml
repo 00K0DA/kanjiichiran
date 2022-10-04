@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_kanji"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="32sp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:text="待機中"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yomi" />
+
+    <TextView
+        android:id="@+id/tv_yomi"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="32sp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:text="たいきちゅう"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <Switch
+        android:id="@+id/sw_kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp"
+        android:text="漢字確認"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_kanji" />
+
+    <EditText
+        android:id="@+id/et_question_time"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="1000"
+        android:inputType="numberDecimal"
+        android:text="650"
+        app:layout_constraintStart_toEndOf="@+id/tv_question_time_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_question_time_title" />
+
+    <TextView
+        android:id="@+id/tv_question_time_title"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="思考時間(ms)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sw_kanji" />
+
+    <Button
+        android:id="@+id/bt_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="次へ"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sw_kanji" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:scaleY="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:text="200/300"
+        app:layout_constraintStart_toEndOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+    <Button
+        android:id="@+id/bt_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="start"
+        app:layout_constraintEnd_toStartOf="@+id/bt_stop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_required_time" />
+
+    <TextView
+        android:id="@+id/tv_required_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="{}秒かかる想定です。"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_answer_time_title" />
+
+    <Button
+        android:id="@+id/bt_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_start"
+        app:layout_constraintTop_toTopOf="@+id/bt_start" />
+
+    <TextView
+        android:id="@+id/tv_answer_time_title"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="回答表示時間(ms)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question_time_title" />
+
+    <EditText
+        android:id="@+id/et_answer_time"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="1000"
+        android:text="1500"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/tv_answer_time_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_answer_time_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

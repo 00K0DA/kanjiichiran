@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">kanjiIchiran</string>
+    <string name="preference_file_key">com.oukoda.kanjiichiran.MyApplication</string>
+
+    <!-- Intent Keys -->
+    <string name="intent_word_index_key">intent_word_key</string>
+
+    <!-- Preferences Keys -->
+    <string name="saved_word_index_key">saved_word_index</string>
+</resources>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_mean"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_number_title" />
+
+    <Button
+        android:id="@+id/bt_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="答え"
+        app:layout_constraintEnd_toStartOf="@+id/bt_hint"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_answer" />
+
+    <TextView
+        android:id="@+id/tv_yomi"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="いきようよう"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mean" />
+
+    <TextView
+        android:id="@+id/tv_answer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center"
+        android:text="意気揚々"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_yomi" />
+
+    <Button
+        android:id="@+id/bt_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ヒント"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_answer"
+        app:layout_constraintTop_toTopOf="@+id/bt_answer" />
+
+    <TextView
+        android:id="@+id/tv_number_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="番号: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="1/200"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_number_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_number_title" />
+
+    <TextView
+        android:id="@+id/tv_true_count_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="正解数: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_number" />
+
+    <TextView
+        android:id="@+id/tv_true_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="20/100"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_true_count_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_true_count_title" />
+
+    <TextView
+        android:id="@+id/tv_true_accuracy_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="正答率: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_true_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_true_count" />
+
+    <TextView
+        android:id="@+id/tv_accuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="888%"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_true_accuracy_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_true_accuracy_title" />
+
+    <Button
+        android:id="@+id/bt_false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不正解"
+        android:layout_marginRight="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bt_true" />
+
+    <Button
+        android:id="@+id/bt_true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="正解"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_false"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
