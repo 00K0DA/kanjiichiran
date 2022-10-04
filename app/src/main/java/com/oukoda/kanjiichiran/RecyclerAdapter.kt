@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oukoda.kanjiichiran.activity.IndexActivity
 import com.oukoda.kanjiichiran.dataclass.Word
 
-class RecyclerAdapter(private val wordList: List<Word>, private val listener: IndexActivity.Companion.WordSelectListener) : RecyclerView.Adapter<ViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup , viewType: Int): ViewHolder {
+class RecyclerAdapter(private val wordList: List<Word>, private val listener: IndexActivity.Companion.WordSelectListener) : RecyclerView.Adapter<ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_list, parent, false)
         return ViewHolder(itemView, listener)
     }
@@ -18,5 +18,4 @@ class RecyclerAdapter(private val wordList: List<Word>, private val listener: In
     }
 
     override fun getItemCount(): Int = wordList.size
-
 }

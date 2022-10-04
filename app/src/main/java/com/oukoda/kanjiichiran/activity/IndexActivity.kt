@@ -11,11 +11,10 @@ import com.oukoda.kanjiichiran.R
 import com.oukoda.kanjiichiran.RecyclerAdapter
 import com.oukoda.kanjiichiran.databinding.ActivityIndexBinding
 
-
-class IndexActivity : AppCompatActivity(){
-    companion object{
-        private val TAG : String? = IndexActivity::class.simpleName
-        interface WordSelectListener{
+class IndexActivity : AppCompatActivity() {
+    companion object {
+        private val TAG: String? = IndexActivity::class.simpleName
+        interface WordSelectListener {
             fun onSelectWord(wordIndex: Int)
         }
     }
@@ -34,15 +33,16 @@ class IndexActivity : AppCompatActivity(){
             }
         }
         var wordIndex = intent.getIntExtra(getString(R.string.intent_word_index_key), -1)
-        if (wordIndex == -1){
+        if (wordIndex == -1) {
             Log.d(TAG, "onCreate: ")
             wordIndex = getSharedPreferences(
                 getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE).getInt(getString(R.string.saved_word_index_key),
+                Context.MODE_PRIVATE
+            ).getInt(
+                getString(R.string.saved_word_index_key),
                 0
             )
             Log.d(TAG, "onCreate: $wordIndex")
-
         }
         binding.RecyclerList.adapter = RecyclerAdapter(wordList, listener)
         binding.RecyclerList.layoutManager = LinearLayoutManager(this)

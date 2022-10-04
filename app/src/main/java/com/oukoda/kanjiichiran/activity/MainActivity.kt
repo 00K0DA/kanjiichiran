@@ -3,13 +3,11 @@ package com.oukoda.kanjiichiran.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.oukoda.kanjiichiran.MyApplication
-import com.oukoda.kanjiichiran.databinding.ActivityIndexBinding
 import com.oukoda.kanjiichiran.databinding.ActivityMainBinding
 
-class MainActivity  : AppCompatActivity(){
-    companion object{
-        private val TAG : String? = WordActivity::class.simpleName
+class MainActivity : AppCompatActivity() {
+    companion object {
+        private val TAG: String? = WordActivity::class.simpleName
     }
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +40,7 @@ class MainActivity  : AppCompatActivity(){
         }
     }
 
-    private fun setDisableButton(disableFlag: Boolean){
+    private fun setDisableButton(disableFlag: Boolean) {
         binding.btIndexActivity.isEnabled = !disableFlag
         binding.btFourWord.isEnabled = !disableFlag
         binding.btWriteFourWord.isEnabled = !disableFlag

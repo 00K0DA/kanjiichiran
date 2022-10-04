@@ -6,14 +6,14 @@ import com.oukoda.kanjiichiran.MyApplication
 import com.oukoda.kanjiichiran.databinding.ActivityFourwordWriteBinding
 import com.oukoda.kanjiichiran.dataclass.FourWord
 
-class WriteFourWordActivity : AppCompatActivity(){
-    companion object{
-        private val TAG : String? = MeaningFourWordActivity::class.simpleName
+class WriteFourWordActivity : AppCompatActivity() {
+    companion object {
+        private val TAG: String? = MeaningFourWordActivity::class.simpleName
     }
     private lateinit var binding: ActivityFourwordWriteBinding
     private lateinit var fourWordList: List<FourWord>
-    private var nowIndex = 0;
-    private var trueCount = 0;
+    private var nowIndex = 0
+    private var trueCount = 0
     private var hintList: ArrayList<Boolean> = arrayListOf<Boolean>(false, false, false, false)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,46 +31,46 @@ class WriteFourWordActivity : AppCompatActivity(){
             setNextQuestion()
         }
 
-        binding.btFalse.setOnClickListener{
+        binding.btFalse.setOnClickListener {
             setNextQuestion()
         }
         setUpperInfo()
         setWord()
     }
 
-    private fun setWord(){
+    private fun setWord() {
         val nowFourWord = fourWordList[nowIndex]
         binding.tvMean.text = getDescriptorString(nowFourWord.descriptor)
         binding.tvYomi.text = nowFourWord.yomi
         binding.tvAnswer.text = getAnswerString()
     }
 
-    private fun getDescriptorString(descriptor: String) : String{
+    private fun getDescriptorString(descriptor: String): String {
         return descriptor.replace("。", "。\n").split("▽")[0]
     }
 
-    private fun getAnswerString(): String{
+    private fun getAnswerString(): String {
         var answerList = fourWordList[nowIndex].word.toList().toMutableList()
-        for (hintIndex in hintList.indices){
-            if (!hintList[hintIndex]){
+        for (hintIndex in hintList.indices) {
+            if (!hintList[hintIndex]) {
                 answerList[hintIndex] = '□'
             }
         }
         return answerList.joinToString("")
     }
 
-    private fun addHint(){
+    private fun addHint() {
         val falseCount = hintList.filter { !it }.size
-        if (falseCount == 0){
+        if (falseCount == 0) {
             return
         }
         var openHintIndex = (0 until falseCount).random()
-        for (hintIndex in hintList.indices){
+        for (hintIndex in hintList.indices) {
             if (hintList[hintIndex]) {
                 openHintIndex += 1
                 continue
             }
-            if (hintIndex == openHintIndex){
+            if (hintIndex == openHintIndex) {
                 hintList[hintIndex] = true
                 break
             }
@@ -78,14 +78,14 @@ class WriteFourWordActivity : AppCompatActivity(){
         binding.tvAnswer.text = getAnswerString()
     }
 
-    private fun showAnswer(){
+    private fun showAnswer() {
         hintList = arrayListOf(true, true, true, true)
         binding.tvAnswer.text = fourWordList[nowIndex].word
     }
 
-    private fun setNextQuestion(){
+    private fun setNextQuestion() {
         nowIndex += 1
-        if (nowIndex >= fourWordList.size){
+        if (nowIndex >= fourWordList.size) {
             nowIndex = 0
         }
         hintList = arrayListOf(false, false, false, false)
@@ -93,10 +93,10 @@ class WriteFourWordActivity : AppCompatActivity(){
         setUpperInfo()
     }
 
-    private fun setUpperInfo(){
-        binding.tvNumber.text = "${nowIndex+1}/${fourWordList.size}"
+    private fun setUpperInfo() {
+        binding.tvNumber.text = "${nowIndex + 1}/${fourWordList.size}"
         binding.tvTrueCount.text = "$trueCount"
-        val acceuracy: Double = (trueCount*100/(nowIndex+1)).toDouble()
+        val acceuracy: Double = (trueCount * 100 / (nowIndex + 1)).toDouble()
         binding.tvAccuracy.text = "%.2f".format(acceuracy)
     }
 
@@ -118,5 +118,4 @@ class WriteFourWordActivity : AppCompatActivity(){
     override fun onDestroy() {
         super.onDestroy()
     }
-
 }

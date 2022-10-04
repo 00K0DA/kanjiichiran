@@ -9,16 +9,14 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.oukoda.kanjiichiran.MyApplication
 import com.oukoda.kanjiichiran.R
 import com.oukoda.kanjiichiran.databinding.ActivityFourwordMeaningBinding
 import com.oukoda.kanjiichiran.dataclass.FourWord
 
-
-class MeaningFourWordActivity : AppCompatActivity(){
-    companion object{
-        private val TAG : String? = MeaningFourWordActivity::class.simpleName
+class MeaningFourWordActivity : AppCompatActivity() {
+    companion object {
+        private val TAG: String? = MeaningFourWordActivity::class.simpleName
     }
     private lateinit var binding: ActivityFourwordMeaningBinding
     private lateinit var fourWordList: List<FourWord>
@@ -26,14 +24,14 @@ class MeaningFourWordActivity : AppCompatActivity(){
     private var correctSoundId: Int = 0
     private var wrongSoundId: Int = 0
 
-    private var nowIndex = -1;
+    private var nowIndex = -1
     private lateinit var randomIndices: List<Int>
     private var runningThreadFlag = false
     private var answerList = mutableListOf<String>()
     private var comboCount = 0
     private var successCount = 0
     private val onclickListener = View.OnClickListener { view ->
-        when(view?.id){
+        when (view?.id) {
             binding.tvCharA.id -> verifyAnswer(0)
             binding.tvCharB.id -> verifyAnswer(1)
             binding.tvCharC.id -> verifyAnswer(2)
@@ -61,19 +59,19 @@ class MeaningFourWordActivity : AppCompatActivity(){
         binding.tvCharB.setOnClickListener(onclickListener)
         binding.tvCharC.setOnClickListener(onclickListener)
         binding.tvCharD.setOnClickListener(onclickListener)
-        binding.btNext.setOnClickListener{
+        binding.btNext.setOnClickListener {
             disableNextButton(true)
             setQuestion()
         }
         disableNextButton(true)
     }
 
-    private fun setQuestion(){
+    private fun setQuestion() {
         nowIndex += 1
         if (nowIndex >= fourWordList.size) {
             nowIndex = 0
         }
-        binding.tvNumber.text = "${nowIndex}/${fourWordList.size}"
+        binding.tvNumber.text = "$nowIndex/${fourWordList.size}"
         binding.tvAcc.text = if (nowIndex != 0) {
             "正答率: ${(successCount * 100 / (nowIndex)).toDouble()}%"
         } else {
@@ -98,7 +96,7 @@ class MeaningFourWordActivity : AppCompatActivity(){
         randomIndices = indices
     }
 
-    private fun setQuestionText(){
+    private fun setQuestionText() {
         val questionThread = HandlerThread("questionThread")
         questionThread.start()
         val questionHandler = Handler(questionThread.looper)
@@ -107,11 +105,11 @@ class MeaningFourWordActivity : AppCompatActivity(){
             runningThreadFlag = false
             Thread.sleep(150)
             runningThreadFlag = true
-            for (c in getDescriptorString()){
-                if(runningThreadFlag){
+            for (c in getDescriptorString()) {
+                if (runningThreadFlag) {
                     uiThreadHandler.post {
                         binding.tvQuestion.text = binding.tvQuestion.text.toString() + c
-                        binding.svQuestion.fullScroll(View.FOCUS_DOWN);
+                        binding.svQuestion.fullScroll(View.FOCUS_DOWN)
                     }
                     Thread.sleep(100)
                 } else {
@@ -123,7 +121,7 @@ class MeaningFourWordActivity : AppCompatActivity(){
         disableSelection(false)
     }
 
-    private fun setSelection(){
+    private fun setSelection() {
         val charIndex = answerList.size
         randomIndices = randomIndices.shuffled()
         binding.tvCharA.text = fourWordList[randomIndices[0]].word[charIndex].toString()
@@ -132,29 +130,30 @@ class MeaningFourWordActivity : AppCompatActivity(){
         binding.tvCharD.text = fourWordList[randomIndices[3]].word[charIndex].toString()
     }
 
-    private fun verifyAnswer(index: Int){
+    private fun verifyAnswer(index: Int) {
         val charIndex = answerList.size
         if (fourWordList[nowIndex].word[charIndex] ==
-            fourWordList[randomIndices[index]].word[charIndex]){
+            fourWordList[randomIndices[index]].word[charIndex]
+        ) {
             answerList.add(fourWordList[nowIndex].word[charIndex].toString())
             if (answerList.size >= 4) {
-                soundPool.play(correctSoundId,1.0f, 1.0f, 0, 0, 1.0f)
+                soundPool.play(correctSoundId, 1.0f, 1.0f, 0, 0, 1.0f)
                 showAnswer()
             } else {
                 applyAnswer()
                 setSelection()
             }
         } else {
-            soundPool.play(wrongSoundId,1.0f, 1.0f, 0, 0, 1.0f)
+            soundPool.play(wrongSoundId, 1.0f, 1.0f, 0, 0, 1.0f)
             showAnswer()
         }
     }
 
-    private fun applyAnswer(){
+    private fun applyAnswer() {
         binding.tvAnswer.text = answerList.joinToString("")
     }
 
-    private fun showAnswer(){
+    private fun showAnswer() {
         disableSelection(true)
         disableNextButton(false)
         binding.tvAnswer.text = fourWordList[nowIndex].word
@@ -175,20 +174,20 @@ class MeaningFourWordActivity : AppCompatActivity(){
         }
     }
 
-    private fun getDescriptorString() : String{
+    private fun getDescriptorString(): String {
         Log.d(TAG, "getDescriptorString: ")
         return fourWordList[nowIndex].descriptor
             .replace("。", "。\n").split("▽")[0]
     }
 
-    private fun disableSelection(isDisable: Boolean){
+    private fun disableSelection(isDisable: Boolean) {
         binding.tvCharA.isClickable = !isDisable
         binding.tvCharB.isClickable = !isDisable
         binding.tvCharC.isClickable = !isDisable
         binding.tvCharD.isClickable = !isDisable
     }
 
-    private fun disableNextButton(isDisable: Boolean){
+    private fun disableNextButton(isDisable: Boolean) {
         binding.btNext.isClickable = !isDisable
         binding.btNext.isEnabled = !isDisable
         binding.btNext.visibility = if (isDisable) View.INVISIBLE else View.VISIBLE

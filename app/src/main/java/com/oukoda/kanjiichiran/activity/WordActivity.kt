@@ -8,9 +8,9 @@ import com.oukoda.kanjiichiran.MyApplication
 import com.oukoda.kanjiichiran.R
 import com.oukoda.kanjiichiran.databinding.ActivityWordBinding
 
-class WordActivity : AppCompatActivity(){
-    companion object{
-        private val TAG : String? = WordActivity::class.simpleName
+class WordActivity : AppCompatActivity() {
+    companion object {
+        private val TAG: String? = WordActivity::class.simpleName
     }
     private lateinit var binding: ActivityWordBinding
     private var wordIndex: Int = -1
@@ -22,7 +22,7 @@ class WordActivity : AppCompatActivity(){
         val wordListLength = (application as MyApplication).wordList.size
         binding.btNext.setOnClickListener {
             wordIndex += 1
-            if (wordIndex >= wordListLength){
+            if (wordIndex >= wordListLength) {
                 wordIndex = wordListLength - 1
             }
             setText()
@@ -30,7 +30,7 @@ class WordActivity : AppCompatActivity(){
         }
         binding.btPrevious.setOnClickListener {
             wordIndex -= 1
-            if (wordIndex <= 0){
+            if (wordIndex <= 0) {
                 wordIndex = 0
             }
             setText()
@@ -45,7 +45,7 @@ class WordActivity : AppCompatActivity(){
         setText()
         saveSelectedText()
     }
-    private fun setText(){
+    private fun setText() {
         val word = (application as MyApplication).wordList[wordIndex]
         binding.tvId.text = word.id.toString()
         binding.tvWord.text = word.word
@@ -53,9 +53,9 @@ class WordActivity : AppCompatActivity(){
         binding.tvYomi.text = word.yomi
     }
 
-    private fun saveSelectedText(){
+    private fun saveSelectedText() {
         val sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putInt(getString(R.string.saved_word_index_key), wordIndex)
             apply()
         }

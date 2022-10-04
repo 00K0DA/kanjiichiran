@@ -14,17 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.oukoda.kanjiichiran.MyApplication
 import com.oukoda.kanjiichiran.databinding.ActivityReadBinding
 import com.oukoda.kanjiichiran.dataclass.Word
-import java.util.*
+import java.util.Locale
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
-class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
-    companion object{
-        private val TAG : String? = ReadActivity::class.simpleName
+class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+    companion object {
+        private val TAG: String? = ReadActivity::class.simpleName
         private const val UTTERANCE_ID = "utteranceId"
     }
     private lateinit var binding: ActivityReadBinding
-    private var nowIndex = -1;
+    private var nowIndex = -1
     private lateinit var innerThread: HandlerThread
     private lateinit var innerThreadHandler: Handler
     private lateinit var uiThreadHandler: Handler
@@ -41,7 +41,7 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         makeWordList()
         binding.progressBar.max = wordList.size
         uiThreadHandler = Handler(Looper.getMainLooper())
-        innerThread = HandlerThread(TAG);
+        innerThread = HandlerThread(TAG)
         innerThread.start()
         innerThreadHandler = Handler(innerThread.looper)
         textToSpeech = TextToSpeech(this, this)
@@ -68,10 +68,10 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         }
 
         setRequiredTime()
-        binding.tvCount.text = "${nowIndex+1}/${wordList.size}"
+        binding.tvCount.text = "${nowIndex + 1}/${wordList.size}"
     }
 
-    private fun makeWordList(){
+    private fun makeWordList() {
         val tempList = mutableListOf<Word>()
         tempList.addAll((application as MyApplication).yomiList)
         tempList.addAll((application as MyApplication).onkunList)
@@ -79,12 +79,12 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         wordList = tempList.toList().distinctBy { it -> it.word }.shuffled()
     }
 
-    private fun updateWord(){
+    private fun updateWord() {
         nowIndex += 1
-        if (nowIndex == wordList.size){
+        if (nowIndex == wordList.size) {
             nowIndex = 0
         }
-        if (!binding.swKanji.isChecked){
+        if (!binding.swKanji.isChecked) {
             uiThreadHandler.post {
                 binding.tvKanji.setTextColor(Color.GRAY)
                 binding.tvKanji.text = wordList[nowIndex].word
@@ -99,18 +99,18 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
             readNowWord()
         }
         uiThreadHandler.post {
-            binding.tvCount.text = "${nowIndex+1}/${wordList.size}"
+            binding.tvCount.text = "${nowIndex + 1}/${wordList.size}"
             binding.progressBar.progress = nowIndex + 1
         }
     }
 
-    private fun showAnswer(){            uiThreadHandler.post {
-
-    if (!binding.swKanji.isChecked){
+    private fun showAnswer() {
+        if (!binding.swKanji.isChecked) {
+            uiThreadHandler.post {
                 binding.tvYomi.setTextColor(Color.RED)
                 binding.tvYomi.text = wordList[nowIndex].yomi
+                readNowWord()
             }
-            readNowWord()
         } else {
             uiThreadHandler.post {
                 binding.tvYomi.setTextColor(Color.RED)
@@ -119,13 +119,14 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         }
     }
 
-    private fun setRequiredTime(){
+    private fun setRequiredTime() {
         if (binding.etQuestionTime.text.toString() == "" ||
-                binding.etAnswerTime.text.toString() == ""){
+            binding.etAnswerTime.text.toString() == ""
+        ) {
             return
         }
-        val questionTime = (binding.etQuestionTime.text.toString().toDouble()/1000) * wordList.size
-        val answerTime = (binding.etAnswerTime.text.toString().toDouble()/1000) * wordList.size
+        val questionTime = (binding.etQuestionTime.text.toString().toDouble() / 1000) * wordList.size
+        val answerTime = (binding.etAnswerTime.text.toString().toDouble() / 1000) * wordList.size
         val requiredTime = questionTime + answerTime
         val requiredMinute = (requiredTime / 60).toInt()
         val requiredSecond = (requiredTime % 60).toInt()
@@ -143,7 +144,7 @@ class ReadActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         }
     }
 
-    private fun readNowWord(){
+    private fun readNowWord() {
         textToSpeech.speak(
             wordList[nowIndex].yomi,
             TextToSpeech.QUEUE_ADD,

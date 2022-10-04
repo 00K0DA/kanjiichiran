@@ -5,11 +5,11 @@ import com.oukoda.kanjiichiran.dataclass.FourWord
 import com.oukoda.kanjiichiran.dataclass.Word
 import com.oukoda.kanjiichiran.util.CsvReader
 
-class MyApplication: Application(){
-    companion object{
+class MyApplication : Application() {
+    companion object {
         private val TAG: String? = MyApplication::class.simpleName
     }
-    lateinit var wordList : List<Word>
+    lateinit var wordList: List<Word>
     lateinit var fourWordList: List<FourWord>
     lateinit var yomiList: List<Word>
     lateinit var onkunList: List<Word>

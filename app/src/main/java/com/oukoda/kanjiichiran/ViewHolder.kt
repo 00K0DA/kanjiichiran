@@ -6,8 +6,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.oukoda.kanjiichiran.activity.IndexActivity
 
-class ViewHolder(private val item: View, private val listener: IndexActivity.Companion.WordSelectListener):RecyclerView.ViewHolder(item), View.OnClickListener {
-    companion object{
+class ViewHolder(private val item: View, private val listener: IndexActivity.Companion.WordSelectListener) : RecyclerView.ViewHolder(item), View.OnClickListener {
+    companion object {
         private val TAG: String? = ViewHolder::class.simpleName
     }
 
